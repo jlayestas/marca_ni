@@ -58,7 +58,8 @@ router.get('/', requireAdmin, async (_req, res) => {
       "SELECT * FROM trademarks WHERE approval_status IS NULL OR approval_status = 'approved' ORDER BY created_at DESC"
     )
     res.json(result.rows)
-  } catch {
+  } catch (err) {
+    console.error('[GET /api/trademarks]', err)
     res.status(500).json({ error: 'Server error' })
   }
 })
