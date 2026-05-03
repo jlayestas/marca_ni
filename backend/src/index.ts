@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import morgan from 'morgan'
 import dotenv from 'dotenv'
 import searchRouter from './routes/search'
 import trademarksRouter from './routes/trademarks'
@@ -17,6 +18,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
   : ['http://localhost:3000', 'http://localhost:3001']
 app.use(cors({ origin: allowedOrigins, credentials: true }))
+app.use(morgan('dev'))
 app.use(express.json())
 
 app.use('/api/auth', authRouter)
