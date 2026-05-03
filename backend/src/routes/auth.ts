@@ -9,7 +9,8 @@ const JWT_SECRET = process.env.JWT_SECRET || 'changeme'
 const JWT_EXPIRES = '8h'
 
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body
+  const email = req.body.email?.trim()
+  const password = req.body.password?.trim()
 
   if (!email || !password) {
     res.status(400).json({ error: 'Email y contraseña requeridos' })
